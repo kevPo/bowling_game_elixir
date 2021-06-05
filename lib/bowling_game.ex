@@ -7,19 +7,19 @@ defmodule BowlingGame do
     score
   end
 
-  defp calculate([roll | [second | [third | []]]], score) do
+  defp calculate([roll, second, third | []], score) do
     score + roll + second + third
   end
 
-  defp calculate([10 | [second | [third | rolls]]], score) do
+  defp calculate([10, second, third | rolls], score) do
     calculate([second, third] ++ rolls, score + 10 + second + third)
   end
 
-  defp calculate([first | [second | [third | rolls]]], score) when first + second == 10 do
+  defp calculate([first, second, third | rolls], score) when first + second == 10 do
     calculate([third] ++ rolls, score + 10 + third)
   end
 
-  defp calculate([first | [second | rolls]], score) do
+  defp calculate([first, second | rolls], score) do
     calculate(rolls, score + first + second)
   end
 
